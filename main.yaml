@@ -1,0 +1,11 @@
+app_title: '日報クリエイター2 Perl版'
+
+development:
+  oauth_client_id    : 'REWRITE HERE'
+  oauth_client_secret: 'REWRITE HERE'
+  oauth_redirect_url : 'http://REWRITE HERE/callback'
+
+#production:
+#  oauth_client_id    : 'REWRITE HERE'
+#  oauth_client_secret: 'REWRITE HERE'
+#  oauth_redirect_url : 'http://REWRITE HERE/callback'

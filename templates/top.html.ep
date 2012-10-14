@@ -1,0 +1,9 @@
+% layout 'default';
+% my $sub_title = 'Top';
+% content_for sub_title => $sub_title;
+<h1><%= $sub_title %> - <%= $config->{app_title} %></h1>
+<ul>
+<li><%= link_to step1 => begin %>作成開始<% end %></li>
+<li><%= link_to logout => begin %>ログアウト<% end %></li>
+</ul>
+

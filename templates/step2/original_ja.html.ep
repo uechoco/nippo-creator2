@@ -1,0 +1,36 @@
+% use HTTP::Date qw/str2time/;
+% use POSIX qw/strftime/;
+% layout 'default';
+% my $sub_title = 'Result';
+% content_for sub_title => $sub_title;
+<h1><%= $sub_title %></h1>
+<textarea cols="80" rows="15">
+Subject:【日報】<%= $begin_date %> <%= $name %>
+
+お疲れ様です、<%= $name %>です。
+本日の日報をお送りします。
+
+■作業内容
+% for my $event (@$event_list) {
+%   my $begin_time = localtime(str2time($event->{start}->{dateTime}));
+%   my $end_time   = localtime(str2time($event->{end}->{dateTime}));
+%   my $begin_str  = strftime('%H:%M', $begin_time);
+%   my $end_str    = strftime('%H:%M', $end_time);
+%   my $diff_time  = $end_time - $begin_time;
+%   my $diff_h     = int($diff_time / 3600);
+%   my $diff_m     = int($diff_time / 60) % 60;
+%=  sprintf("%s-%s [%2dh%02dm] %s", $begin_str, $end_time, $diff_h, $diff_m, $event->{summary});
+% }
+
+■個別作業詳細
+% my $c = 0;
+% for my $event (@$event_list) {
+%   next unless ($event->{description});
+%=  sprintf("%d. %s", ++$c, $event->{summary});
+%=  $event->{description}
+
+% }
+===
+この日報は <%= $config->{app_title} %> で自動生成されました。
+</textarea>
+

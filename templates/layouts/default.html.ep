@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<%= app->renderer->encoding %>" />
+<title><%= content_for 'sub_title' %> - <%= $config->{app_title} %></title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+%= content_for 'script'
+<link rel='stylesheet' href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/smoothness/jquery-ui.css" />
+%= content_for 'style'
+</head>
+<body>
+%= content
+</body>
+</html>
+

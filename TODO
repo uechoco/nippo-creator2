@@ -1,0 +1,14 @@
+TODO list
+
+high:
+ - sort by time when the events are fetched by more than one calendar
+
+middle:
+ - choose output template
+ - fetch the next day events
+ - support pageToken at events.list method
+
+low:
+ - send mail option
+ - introduce some template engine (e.g. Xslate)
+ 

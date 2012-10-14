@@ -1,0 +1,52 @@
+% layout 'default';
+% my $sub_title = 'Step1: 情報入力';
+% content_for sub_title => $sub_title;
+% content_for script => begin
+<script>
+$(document).ready(function(){
+  // リスト間で選択中アイテムを移動する
+  var moveSelectedItem = function(from, to) {
+      $(to).append($(from).children('option:selected'));
+      $(from).children('option:selected').remove();
+      $(to).children('option:selected').attr('selected', false);
+  };
+  $('#btnUsed').click(function(){
+      moveSelectedItem('#selUnusedFeed', '#selFeed');
+  });
+  $('#btnUnused').click(function(){
+      moveSelectedItem('#selFeed', '#selUnusedFeed');
+  });
+  // 送信する前に、選択済みにしておく
+  $('#frmStep1').submit(function(){
+      $('#selFeed').children('option').attr('selected', true);
+  });
+  $('#txtBeginDate').datepicker({ dateFormat: "yy-mm-dd" });
+  $('#txtNextDate').datepicker({ dateFormat: "yy-mm-dd" });
+});
+</script>
+% end
+<h1><%= $sub_title %></h1>
+%= form_for step1 => (method => 'POST', id => 'frmStep1') => begin
+<h2>名前の入力</h2>
+%= input_tag name => session 'name';
+<h2>カレンダーの選択</h2>
+<table><tr>
+  <td>
+    %= select_field feeds => $used_list, id => 'selFeed', multiple => 'multiple'
+  </td>
+  <td>
+    <p><%= input_tag 'btnUsed', id => 'btnUsed', type => 'button', value => '←' %></p>
+    <p><%= input_tag 'btnUnused', id => 'btnUnused', type => 'button', value => '→' %></p>
+  </td>
+  <td>
+    %= select_field unused_feeds => $unused_list, id => 'selUnusedFeed', multiple => 'multiple'
+  </td>
+</tr></table>
+<h2>日付の選択</h2>
+<p>今日の日付：<%= input_tag 'begin_date', id => 'txtBeginDate', value => $today_str %></p>
+<p>翌営業日の日付：<%= input_tag 'next_date', id => 'txtNextDate', value => $tomorrow_str %></p>
+<h2>フォーマットの選択</h2>
+(製作中)<br />
+%= submit_button '日報作成', id => 'btnStep1Submit';
+%= end
+
